@@ -1,0 +1,30 @@
+#!/bin/bash -eu
+
+set -o pipefail
+
+vars="${1:?}"
+raw="${2:?}"
+out="${3:?}"
+
+. $vars
+
+default_caption_size=$(echo "$height * 0.08" | bc -l)
+default_caption_offset=$(echo "$height * 0.06" | bc -l)
+
+caption_size=${caption_size:-$default_caption_size}
+caption_offset=${caption_offset:-$default_caption_offset}
+frames=$(identify $raw | wc -l)
+caption_delay=${caption_delay:-0}
+
+caption_start_frame=$(echo "$caption_delay / $seconds * $frames" | bc -l)
+caption_stop_frame=$(echo "$frames - 1" | bc -l)
+
+convert \
+    "$raw" \
+    -gravity south \
+    -fill "$caption_color" \
+    -pointsize $caption_size \
+    -font Arial-Black \
+    \( -clone $caption_start_frame-$caption_stop_frame -annotate +0+$caption_offset "$caption" \) \
+    -delete $caption_start_frame-$caption_stop_frame \
+    "$out"

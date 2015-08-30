@@ -1,0 +1,20 @@
+#!/bin/bash -eux
+
+vars="${1:?}"
+video="${2:?}"
+out="${3:?}"
+
+. $vars
+
+fps=${fps:-24}
+crop_top=${crop_top:-0}
+crop_bottom=${crop_bottom:-0}
+scale_height=$(echo "$height + $crop_top + $crop_bottom" | bc -l)
+
+ffmpeg \
+    -y \
+    -ss $video_start \
+    -t $seconds \
+    -i "$video" \
+    -vf fps=$fps,scale=-1:$scale_height,crop=$width:$height:$crop_left:$crop_top \
+    "$out"
