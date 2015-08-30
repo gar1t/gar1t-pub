@@ -12,7 +12,7 @@ gifs: $(GIFS)
 	./make-animated $*.in $< $@
 
 %.video: %.in
-	test ! -e $@ && ./get-video $< $@ || touch $@
+	./get-video $< $@
 
 sync:
 	s3cmd sync -P $(GIFS) s3://gar1t-pub

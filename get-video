@@ -5,4 +5,16 @@ out="${2:?}"
 
 . $vars
 
+if [ -e "$out" ]; then
+    touch "$out"
+    exit 0
+fi
+
+video_src=${video_src:-}
+
+if [ -z "$video_src" ]; then
+    echo "video_src not specified - create a symlink to $out" >&2
+    exit 1
+fi
+
 cclive --filename-format "$out" "$video_src"
