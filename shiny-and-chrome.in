@@ -1,0 +1,12 @@
+#-*-sh-*-
+video_src=https://www.youtube.com/watch?v=GI5Jkvcf4TU
+video_start=00:00:04
+seconds=3
+
+height=151
+width=177
+crop_left=100
+
+caption="You Will Ride Eternal!"
+caption_color=white
+caption_size=13.5
