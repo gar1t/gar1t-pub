@@ -1,0 +1,10 @@
+#-*-sh-*-
+video_start=00:17:51.4
+seconds=2.21
+
+height=151
+width=177
+crop_left=100
+
+caption="Confucamus!"
+caption_size=14

@@ -16,26 +16,36 @@ default_caption_size=$(math "$height * 0.08")
 default_caption_offset=$(math "$height * 0.06")
 default_caption_font=Arial-Black
 default_caption_weight=Normal
+default_caption_color=white
 
-caption_size=${caption_size:-$default_caption_size}
-caption_offset=${caption_offset:-$default_caption_offset}
-caption_font=${caption_font:-$default_caption_font}
-caption_weight=${caption_weight:-$default_caption_weight}
-caption_delay=${caption_delay:-0}
+convert-with-caption() {
+    caption_size=${caption_size:-$default_caption_size}
+    caption_offset=${caption_offset:-$default_caption_offset}
+    caption_font=${caption_font:-$default_caption_font}
+    caption_weight=${caption_weight:-$default_caption_weight}
+    caption_color=${caption_color:-$default_caption_color}
+    caption_delay=${caption_delay:-0}
 
-frames=$(identify $raw | wc -l)
-caption_start_frame=$(math "int(float($caption_delay) / $seconds * $frames)")
-caption_stop_frame=$(math "$frames - 1")
+    frames=$(identify $raw | wc -l)
+    caption_start_frame=$(math "int(float($caption_delay) / $seconds * $frames)")
+    caption_stop_frame=$(math "$frames - 1")
 
-convert \
-    "$raw" \
-    -coalesce \
-    -gravity south \
-    -fill "$caption_color" \
-    -pointsize $caption_size \
-    -font "$caption_font" \
-    -weight "$caption_weight" \
-    \( -clone $caption_start_frame-$caption_stop_frame -annotate +0+$caption_offset "$caption" \) \
-    -delete $caption_start_frame-$caption_stop_frame \
-    -layers Optimize \
-    "$out"
+    convert \
+        "$raw" \
+        -coalesce \
+        -gravity south \
+        -fill "$caption_color" \
+        -pointsize $caption_size \
+        -font "$caption_font" \
+        -weight "$caption_weight" \
+        \( -clone $caption_start_frame-$caption_stop_frame -annotate +0+$caption_offset "$caption" \) \
+        -delete $caption_start_frame-$caption_stop_frame \
+        -layers Optimize \
+        "$out"
+}
+
+if [ ! -z "${caption:-}" ]; then
+    convert-with-caption
+else
+    cp $raw $out
+fi
