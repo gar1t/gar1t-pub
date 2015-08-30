@@ -1,0 +1,15 @@
+#-*-sh-*-
+video_src=https://www.youtube.com/watch?v=4KlSuGNt8e4
+video_start=00:00:12.5
+seconds=12.4
+
+height=151
+width=177
+crop_top=28
+crop_bottom=28
+crop_left=130
+
+caption="WITNESS ME!!!"
+caption_color=white
+caption_size=15
+caption_delay=9.7

@@ -5,10 +5,10 @@ GIFS = $(patsubst %.in,%.gif,$(SOURCES))
 
 gifs: $(GIFS)
 
-%.gif: %.raw.gif make-final
+%.gif: %.raw.gif
 	./make-final $*.in $< $@
 
-%.raw.gif: %.video make-animated
+%.raw.gif: %.video
 	./make-animated $*.in $< $@
 
 %.video: %.in
