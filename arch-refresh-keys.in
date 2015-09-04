@@ -1,0 +1,15 @@
+#-*-sh-*-
+video_start=01:30:21.3
+seconds=3
+
+height=338
+width=504
+crop_left=250
+
+caption="pacman-key --refresh-keys"
+caption_color=white
+caption_size=28
+caption_font=DejaVu-Sans-Mono-Bold
+caption_delay=1
+
+fps=11
