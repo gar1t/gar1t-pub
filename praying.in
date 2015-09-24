@@ -1,0 +1,7 @@
+#-*-sh-*-
+video_start=01:30:21.3
+seconds=3
+
+height=151
+width=177
+crop_left=140
