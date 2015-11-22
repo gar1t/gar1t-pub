@@ -1,0 +1,12 @@
+#-*-sh-*-
+video_start=00:16:38
+seconds=8.5
+
+height=151
+width=177
+crop_left=30
+
+caption="Started the wrong TE!"
+caption_color=white
+caption_size=14
+caption_delay=5.6
